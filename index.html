@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Lab Perkecambahan</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e6f9e6;
+      text-align: center;
+    }
+    header {
+      background-color: #145a32;
+      color: white;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    .bubble-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+    .bubble {
+      background-color: #58d68d;
+      border-radius: 50%;
+      width: 160px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      font-size: 1rem;
+      font-weight: bold;
+      color: #145a32;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      flex-direction: column;
+    }
+    .bubble:hover {
+      transform: scale(1.05);
+      background-color: #2ecc71;
+    }
+    .content-box {
+      margin: 2rem auto;
+      padding: 1.5rem;
+      max-width: 800px;
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 1rem;
+      display: none;
+      text-align: left;
+    }
+    .content-box h2 {
+      margin-top: 0;
+      color: #145a32;
+    }
+    .sim-section {
+      background-color: #f9f9f9;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 0.75rem;
+    }
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .sim-button {
+      background-color: #1e8449;
+      color: white;
+      padding: 0.7rem 1.2rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .sim-button:hover {
+      background-color: #196f3d;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #bbb;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #d4efdf;
+    }
+    .quiz-question {
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Praktikum Virtual Lab<br>(Perkecambahan Dikotil dan Monokotil)</h1>
+  </header>
+
+  <div class="bubble-container">
+    <div class="bubble" onclick="showContent('materi')">📚<br>Materi</div>
+    <div class="bubble" onclick="showContent('alat')">🧪<br>Alat & Bahan</div>
+    <div class="bubble" onclick="showContent('eksperimen')">🌱<br>Simulasi</div>
+    <div class="bubble" onclick="showContent('tes')">📝<br>Tes & Evaluasi</div>
+    <div class="bubble" onclick="showContent('laporan')">📤<br>Laporan</div>
+  </div>
+
+  <div class="content-box" id="materi">
+    <h2>Materi Teori 📚</h2>
+    <p>
+      Pertumbuhan adalah proses pertambahan ukuran, volume, dan massa yang bersifat <strong>irreversible</strong> (tidak dapat kembali ke keadaan semula), sedangkan perkembangan mencakup proses menuju kedewasaan dan diferensiasi sel, jaringan, serta organ. Dalam konteks pertumbuhan awal tumbuhan, proses yang paling awal dan krusial adalah perkecambahan.
+    </p>
+    <p>
+      Perkecambahan merupakan proses munculnya individu baru dari biji yang ditandai dengan keluarnya radikula (akar lembaga) menembus kulit biji. Perkecambahan dapat diklasifikasikan menjadi dua jenis, yaitu <strong>perkecambahan epigeal</strong> dan <strong>hipogeal</strong>. Pada perkecambahan epigeal, kotiledon (daun lembaga) terangkat ke atas permukaan tanah karena aktivitas pemanjangan hipokotil. Sedangkan pada perkecambahan hipogeal, kotiledon tetap berada di bawah permukaan tanah karena yang memanjang adalah epikotil.
+    </p>
+    <p>
+      Faktor-faktor yang mempengaruhi proses perkecambahan antara lain adalah <strong>air, suhu, oksigen, dan cahaya</strong>. Selain itu, hormon tumbuhan seperti <strong>auksin, giberelin, dan sitokinin</strong> juga berperan penting dalam mengatur proses perkecambahan dan pertumbuhan sel.
+    </p>
+  </div>
+
+  <div class="content-box" id="alat">
+    <h2>Alat dan Bahan 🧪</h2>
+    <ul>
+      <li>1. Gelas beaker</li>
+      <li>2. Cawan petri</li>
+      <li>3. Tisu</li>
+      <li>4. Aquades</li>
+      <li>5. Kacang merah</li>
+      <li>6. Biji jagung</li>
+    </ul>
+  </div>
+
+  <div class="content-box" id="eksperimen">
+    <h2>Simulasi Eksperimen 🌱</h2>
+    <div class="button-container">
+      <button class="sim-button" onclick="showSim('sim1')">Kacang Merah - Gelap</button>
+      <button class="sim-button" onclick="showSim('sim2')">Kacang Merah - Terang</button>
+      <button class="sim-button" onclick="showSim('sim3')">Jagung - Gelap</button>
+      <button class="sim-button" onclick="showSim('sim4')">Jagung - Terang</button>
+    </div>
+
+    <div id="sim-area"></div>
+  </div>
+
+  <div class="content-box" id="tes">
+    <h2>Tes & Evaluasi 📝</h2>
+    <form id="quizForm">
+      <div class="quiz-question">
+        <p>1. Proses awal pertumbuhan tumbuhan yang diawali dengan munculnya akar dan tunas disebut...</p>
+        <label><input type="radio" name="q1" value="A"> A. Fotosintesis</label><br>
+        <label><input type="radio" name="q1" value="B"> B. Perkecambahan</label><br>
+        <label><input type="radio" name="q1" value="C"> C. Respirasi</label><br>
+        <label><input type="radio" name="q1" value="D"> D. Reproduksi</label>
+      </div>
+      <div class="quiz-question">
+        <p>2. Faktor eksternal yang paling berpengaruh terhadap keberhasilan perkecambahan adalah...</p>
+        <label><input type="radio" name="q2" value="A"> A. Karbon dioksida dan nitrogen</label><br>
+        <label><input type="radio" name="q2" value="B"> B. Cahaya dan air</label><br>
+        <label><input type="radio" name="q2" value="C"> C. Air, oksigen, dan suhu</label><br>
+        <label><input type="radio" name="q2" value="D"> D. Cahaya, hormon, dan udara</label>
+      </div>
+      <div class="quiz-question">
+        <p>3. Tumbuhan yang memiliki satu kotiledon termasuk dalam jenis...</p>
+        <label><input type="radio" name="q3" value="A"> A. Monokotil</label><br>
+        <label><input type="radio" name="q3" value="B"> B. Dikotil</label><br>
+        <label><input type="radio" name="q3" value="C"> C. Gymnospermae</label><br>
+        <label><input type="radio" name="q3" value="D"> D. Bryophyta</label>
+      </div>
+      <div class="quiz-question">
+        <p>4. Berikut ini adalah contoh tumbuhan dikotil, kecuali...</p>
+        <label><input type="radio" name="q4" value="A"> A. Kacang tanah</label><br>
+        <label><input type="radio" name="q4" value="B"> B. Kedelai</label><br>
+        <label><input type="radio" name="q4" value="C"> C. Tomat</label><br>
+        <label><input type="radio" name="q4" value="D"> D. Padi</label>
+      </div>
+      <div class="quiz-question">
+        <p>5. Perkecambahan yang kotiledonnya terangkat ke permukaan tanah disebut...</p>
+        <label><input type="radio" name="q5" value="A"> A. Epigeal</label><br>
+        <label><input type="radio" name="q5" value="B"> B. Hipogeal</label><br>
+        <label><input type="radio" name="q5" value="C"> C. Homogen</label><br>
+        <label><input type="radio" name="q5" value="D"> D. Epikotil</label>
+      </div>
+      <button type="button" onclick="checkScore()">💯 Nilai Tes</button>
+    </form>
+    <p id="scoreResult"></p>
+  </div>
+
+  <div class="content-box" id="laporan">
+    <h2>Pengumpulan Laporan 📤</h2>
+    <p>Silakan kumpulkan laporanmu melalui tautan berikut:</p>
+    <p><a href="https://drive.google.com/drive/folders/1drtg0atpiis1M_9MoB2Zv-HMD_qD5e48?usp=drive_link" target="_blank">📥 Link Pengumpulan Laporan</a></p>
+  </div>
+
+  <script>
+    const simData = {
+      sim1: {
+        title: "Kacang Merah - Perlakuan Gelap",
+        description: "Perlakuan ini menguji pertumbuhan kacang merah tanpa cahaya.",
+        table: `
+          <table>
+            <tr><th>Hari</th><th>Panjang Akar</th><th>Panjang Tunas</th><th>Warna</th><th>Ciri Khas</th></tr>
+            <tr><td>1</td><td>0.5 cm</td><td>0.3 cm</td><td>Putih</td><td>Radikula muncul</td></tr>
+            <tr><td>3</td><td>1.2 cm</td><td>2.5 cm</td><td>Kuning pucat</td><td>Etiolasi mulai tampak</td></tr>
+            <tr><td>5</td><td>2.3 cm</td><td>4.5 cm</td><td>Kuning pucat</td><td>Batang kurus tinggi</td></tr>
+          </table>`
+      },
+      sim2: {
+        title: "Kacang Merah - Perlakuan Terang",
+        description: "Pengamatan pertumbuhan kacang merah dengan pencahayaan cukup.",
+        table: `
+          <table>
+            <tr><th>Hari</th><th>Panjang Akar</th><th>Panjang Tunas</th><th>Warna</th><th>Ciri Khas</th></tr>
+            <tr><td>1</td><td>0.6 cm</td><td>0.4 cm</td><td>Hijau pucat</td><td>Awal pertumbuhan</td></tr>
+            <tr><td>3</td><td>1.8 cm</td><td>3.0 cm</td><td>Hijau muda</td><td>Tunas tegak</td></tr>
+            <tr><td>5</td><td>3.5 cm</td><td>5.2 cm</td><td>Hijau</td><td>Daun terbuka</td></tr>
+          </table>`
+      },
+      sim3: {
+        title: "Jagung - Perlakuan Gelap",
+        description: "Pertumbuhan biji jagung dalam kondisi gelap.",
+        table: `
+          <table>
+            <tr><th>Hari</th><th>Panjang Akar</th><th>Panjang Tunas</th><th>Warna</th><th>Ciri Khas</th></tr>
+            <tr><td>1</td><td>0.4 cm</td><td>0.2 cm</td><td>Putih</td><td>Radikula muncul</td></tr>
+            <tr><td>3</td><td>1.1 cm</td><td>2.0 cm</td><td>Kuning pucat</td><td>Batang memanjang</td></tr>
+            <tr><td>5</td><td>2.0 cm</td><td>3.8 cm</td><td>Kuning</td><td>Tanpa daun sejati</td></tr>
+          </table>`
+      },
+      sim4: {
+        title: "Jagung - Perlakuan Terang",
+        description: "Pertumbuhan biji jagung dengan pencahayaan cukup.",
+        table: `
+          <table>
+            <tr><th>Hari</th><th>Panjang Akar</th><th>Panjang Tunas</th><th>Warna</th><th>Ciri Khas</th></tr>
+            <tr><td>1</td><td>0.5 cm</td><td>0.3 cm</td><td>Hijau pucat</td><td>Radikula aktif</td></tr>
+            <tr><td>3</td><td>2.0 cm</td><td>3.0 cm</td><td>Hijau muda</td><td>Tunas lurus</td></tr>
+            <tr><td>5</td><td>4.2 cm</td><td>5.8 cm</td><td>Hijau</td><td>Daun sejati mulai muncul</td></tr>
+          </table>`
+      }
+    }
+
+    function showContent(id) {
+      document.querySelectorAll('.content-box').forEach(box => box.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function showSim(simId) {
+      const sim = simData[simId];
+      const html = `
+        <div class="sim-section">
+          <h3>${sim.title}</h3>
+          <p>${sim.description}</p>
+          ${sim.table}
+        </div>`;
+      document.getElementById('sim-area').innerHTML = html;
+    }
+
+    function checkScore() {
+      const answers = { q1: 'B', q2: 'C', q3: 'A', q4: 'D', q5: 'A' };
+      let score = 0;
+      for (let i = 1; i <= 5; i++) {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && selected.value === answers[`q${i}`]) {
+          score += 20;
+        }
+      }
+      document.getElementById("scoreResult").textContent = `Skor Anda: ${score}/100`;
+    }
+  </script>
+</body>
+</html>
